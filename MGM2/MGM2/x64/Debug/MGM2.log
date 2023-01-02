@@ -1,0 +1,20 @@
+﻿  base.cpp
+  input.cpp
+  platform.cpp
+  prompt.cpp
+C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\cpp-terminal\prompt.cpp(176,56): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\cpp-terminal\prompt.cpp(177,108): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\cpp-terminal\prompt.cpp(182,46): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\cpp-terminal\prompt.cpp(183,96): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\cpp-terminal\prompt.cpp(184,89): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\cpp-terminal\prompt.cpp(190,64): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\cpp-terminal\prompt.cpp(192,73): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\cpp-terminal\prompt.cpp(220,48): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\cpp-terminal\prompt.cpp(340,50): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\cpp-terminal\prompt.cpp(344,52): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  window.cpp
+  Main.cpp
+C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\Main.cpp(178,115): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\cpp-terminal\private\platform.cpp(114): warning C4715: 'Term::Private::getenv': not all control paths return a value
+  MGM2.vcxproj -> C:\Users\0501j\Programming\C++\MGM2\MGM2\x64\Debug\MGM2.exe

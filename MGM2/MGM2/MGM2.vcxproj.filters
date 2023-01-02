@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="cpp-terminal">
+      <UniqueIdentifier>{9d82a821-2c8b-4911-bd86-4c77269a2655}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cpp-terminal\base.hpp">
+      <Filter>cpp-terminal</Filter>
+    </ClInclude>
+    <ClInclude Include="cpp-terminal\input.hpp">
+      <Filter>cpp-terminal</Filter>
+    </ClInclude>
+    <ClInclude Include="cpp-terminal\prompt.hpp">
+      <Filter>cpp-terminal</Filter>
+    </ClInclude>
+    <ClInclude Include="cpp-terminal\version.hpp">
+      <Filter>cpp-terminal</Filter>
+    </ClInclude>
+    <ClInclude Include="cpp-terminal\window.hpp">
+      <Filter>cpp-terminal</Filter>
+    </ClInclude>
+    <ClInclude Include="cpp-terminal\private\conversion.hpp">
+      <Filter>cpp-terminal</Filter>
+    </ClInclude>
+    <ClInclude Include="cpp-terminal\private\macros.hpp">
+      <Filter>cpp-terminal</Filter>
+    </ClInclude>
+    <ClInclude Include="cpp-terminal\private\platform.hpp">
+      <Filter>cpp-terminal</Filter>
+    </ClInclude>
+    <ClInclude Include="Combat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Infliction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cpp-terminal\input.cpp">
+      <Filter>cpp-terminal</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp-terminal\prompt.cpp">
+      <Filter>cpp-terminal</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp-terminal\window.cpp">
+      <Filter>cpp-terminal</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp-terminal\base.cpp">
+      <Filter>cpp-terminal</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp-terminal\private\platform.cpp">
+      <Filter>cpp-terminal</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp-terminal\version.hpp.in">
+      <Filter>cpp-terminal</Filter>
+    </None>
+    <None Include="..\x64\Debug\MGM2.exe" />
+    <None Include="..\x64\Debug\MGM2.pdb" />
+  </ItemGroup>
+</Project>
