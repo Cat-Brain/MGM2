@@ -15,7 +15,10 @@ sleep_until(system_clock::now() + seconds(1));
 #include <algorithm>
 #include <stdexcept>
 #include "cpp-terminal/base.hpp" // Fancy colors. =]
+#include "cpp-terminal/window.hpp"
+#include "cpp-terminal/input.hpp"
 #define T_RESET "\033[0m"
+#include "gainput/gainput.h"
 
 using std::string;
 using std::vector;
@@ -26,6 +29,7 @@ using std::isdigit;
 using std::stoi;
 
 typedef unsigned int uint;
+typedef uint8_t byte;
 // Early functions:
 // Early functions.
 int RandRange(int min, int max)

@@ -11,12 +11,14 @@ I hope that you enjoy this experience, and if you want, maybe you'll even mod th
 
 #pragma region Variables
 
+Term::Terminal terminal = Term::Terminal(true, true, true, true);
+Term::Window window = Term::Window(1, 1);
+int screenWidth, screenHeight;
+
 bool restart = true;
-bool specialFightEnding = false;
-vector<Entity*> specialFightEndingMonsters(0);
 Settings currentSettings;
 
-//Constant variables:
+#pragma region Constants
 //Attacks
 //The syntax for a status effect is :
 //StatusEffect(InflictionType.YOURINFLICTION, how long you want it to last)
@@ -69,9 +71,7 @@ Weapon axe{ { deepCut, finisher }, "Axe", 0.0 };
 Weapon sword{ { heavyBlow, quickAttack }, "Sword", 0.0 };
 Weapon ogreInABottle{ { clubBash, punch }, "Ogre in a Bottle", 0.5 };
 Weapon python{ { heaviestBlow, quickAttack }, "Python", 0.5 };
-
-
-Player player;
+#pragma endregion
 
 #pragma endregion
 
@@ -80,6 +80,7 @@ Player player;
 
 
 #pragma region Functions
+/*
 void FindSettings()
 {
     string prompt = Input("How many seconds do you want to wait after key events('default' = 1) ");
@@ -98,11 +99,11 @@ void FindSettings()
     }
     currentSettings = Settings(result);
 }
+*/
 
 
 
-
-
+/*
 void FightSequence(vector<Entity> enemyTypes, bool spareable, vector<vector<string>> specialEnding)
 {
     specialFightEnding = false;
@@ -459,15 +460,26 @@ void FightSequence(vector<Entity> enemyTypes, bool spareable, vector<vector<stri
     player.health = std::min(player.maxHealth, player.health + 50);
     printf("You end the fight with %i health.\n", player.health);
 }
+*/
 #pragma endregion
 
 
 
 
-
+int playerX = 0, playerY = 0;
 void Run() // Runs the game, this function is called once per playthrough.
 {
-
+    window.clear();
+    for (int x = 1; x < screenWidth; x++)
+        for (int y = 1; y < screenHeight; y++)
+        {
+            int x2 = (x - 1 + playerX) % (screenWidth - 1) + 1;
+            int y2 = (y - 1 + playerY) % (screenHeight - 1) + 1;
+            window.set_char(x2, y2, '#');
+            window.set_fg(x2, y2, { static_cast<byte>(x * 255 / screenWidth), static_cast<byte>(y * 255 / screenHeight), 0 });
+            window.set_bg(x2, y2, { 0, 0, static_cast<byte>(x + y) * 5u % 255u });
+        }
+    std::cout << window.render(1, 1, true);
 }
 
 
@@ -476,10 +488,13 @@ void Run() // Runs the game, this function is called once per playthrough.
 
 int main()
 {
-    Term::Terminal term(false);
+    terminal = Term::Terminal(true, true, true, true);
     Term::terminal_title("M");
+    std::tuple<size_t, size_t> size = Term::get_size();
+    screenWidth = std::get<1>(size);
+    screenHeight = std::get<0>(size);
+    window = Term::Window(screenWidth, screenHeight);
 
-    FindSettings();
     while (restart)
         Run();
 }
