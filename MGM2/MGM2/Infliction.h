@@ -25,14 +25,14 @@ struct InflictionSpecs
     Term::RGB color;
 };
 InflictionSpecs inflictionSpecs[] = {
-    { 0, 0, 0, "NULL INFLICTION TYPE", Term::RGB(255, 25, 2) },
-    { 2, 2, 0, "poison", Term::RGB(111, 158, 0)},
-    { 3, 1, 0, "bleed", Term::RGB(158, 0, 55)},
-    { 10, 5, 0, "burning", Term::RGB(255, 167, 66)},
-    { 1, 10, 0, "deadly hug", Term::RGB(41, 255, 198)},
-    { 0, 0, 0, "stun", Term::RGB(200, 200, 0)},
-    { 0, 0, 15, "wet", Term::RGB(0, 0, 200)},
-    { 0, 0, -10, "strengthen", Term::RGB(150, 0, 200)}
+    { 0, 0, 0, "NULL INFLICTION TYPE", { 255, 25, 2 } },
+    { 2, 2, 0, "poison", { 111, 158, 0 } },
+    { 3, 1, 0, "bleed", { 158, 0, 55 } },
+    { 10, 5, 0, "burning", { 255, 167, 66 } },
+    { 1, 10, 0, "deadly hug", { 41, 255, 198 } },
+    { 0, 0, 0, "stun", { 200, 200, 0 } },
+    { 0, 0, 15, "wet", { 0, 0, 200 } },
+    { 0, 0, -10, "strengthen", { 150, 0, 200 } }
 };
 
 

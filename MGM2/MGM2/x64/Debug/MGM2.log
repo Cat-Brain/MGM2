@@ -1,23 +1,2 @@
 ﻿  Main.cpp
-C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\Main.cpp(494,30): warning C4244: '=': conversion from 'unsigned __int64' to 'int', possible loss of data
-C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\Main.cpp(495,31): warning C4244: '=': conversion from 'unsigned __int64' to 'int', possible loss of data
-C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\gainput\GainputContainers.h(322,1): warning C4267: '=': conversion from 'size_t' to 'T', possible loss of data
-          with
-          [
-              T=gainput::uint32_t
-          ]
-C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\gainput\GainputContainers.h(309,1): message : while compiling class template member function 'gainput::HashMap<gainput::DeviceId,bool>::Node *gainput::HashMap<gainput::DeviceId,bool>::insert(const K &,const V &)'
-          with
-          [
-              K=gainput::DeviceId,
-              V=bool
-          ]
-C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\gainput\GainputContainers.h(356,4): message : see reference to function template instantiation 'gainput::HashMap<gainput::DeviceId,bool>::Node *gainput::HashMap<gainput::DeviceId,bool>::insert(const K &,const V &)' being compiled
-          with
-          [
-              K=gainput::DeviceId,
-              V=bool
-          ]
-C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\gainput\recorder\GainputInputRecorder.h(64,26): message : see reference to class template instantiation 'gainput::HashMap<gainput::DeviceId,bool>' being compiled
-C:\Users\0501j\Programming\C++\MGM2\MGM2\MGM2\gainput\GainputContainers.h(330,1): warning C4267: '=': conversion from 'size_t' to 'gainput::uint32_t', possible loss of data
   MGM2.vcxproj -> C:\Users\0501j\Programming\C++\MGM2\MGM2\x64\Debug\MGM2.exe

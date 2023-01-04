@@ -11,11 +11,13 @@ I hope that you enjoy this experience, and if you want, maybe you'll even mod th
 
 #pragma region Variables
 
+vector<Entity*> entities;
+
 Term::Terminal terminal = Term::Terminal(true, true, true, true);
 Term::Window window = Term::Window(1, 1);
 int screenWidth, screenHeight;
 
-bool restart = true;
+bool shouldRun = true, restart = true;
 Settings currentSettings;
 
 #pragma region Constants
@@ -53,24 +55,26 @@ Attack growHead{ {}, {}, 0, 0, {}, {}, 0, 0, { &joshroHead }, 4, "grow head" };
 Attack ultraFireBreath{ { {BURNING, 3} }, { 100 }, 0, 0, {}, {}, 0, 0, {}, 1, "ultra fire breath" };
 Attack strengthen{ { {STRENGTHEN, 2} }, {100}, 0, 0, { {STRENGTHEN, 4} }, {100}, 0, 0, {}, 1, "strengthen" };
 Attack healify{ {}, {}, -25, 25, {}, {}, -50, 50, {}, 1, "healify" };
+Attack heavyKick{ {}, {}, 60, 60, {}, {}, 0, 0, {}, 3, "heavy kick" };
 
 //The syntax for enemies is :
-//Enemy(start health, max health, [attack1, attack2, ...], "name", leech amount 0 to 1 work best
-Entity joshrosBody{ 300, 300, { growHead }, "Joshro's Body", 0.0 };
-Entity ogre{ 100, 100, { clubBash, punch }, "Ogre", 0.0 };
-Entity goblin{ 100, 100, { quickStab, rockThrow }, "Goblin", 0.0 };
-Entity slime{ 25, 50, { slimeHug }, "Pet Slime", 1.0 };
-Entity troll{ 125, 125, { quickClubBash, splash }, "troll", 0.0 };
-Entity mutant{ 200, 200, { punch, heavyPunch }, "mutant", 0.0 };
-Entity rat{ 100, 200, { bite, scratch }, "Rat", 0.25 };
-Entity babyRat{ 25, 50, { bite, scratch, splash }, "Baby Rat", 0.5 };
-Entity guard{ 200, 200, { heavyBlow, quickAttack }, "Unloyal Guard", 0.0 };
+//Enemy varName(start health, max health, { attack1, attack2, ... }, "str name", leech amount(0 to 1 work best).
+Entity joshrosBody{ 300, 300, { growHead }, "Joshro's Body", 0.0f };
+Entity ogre{ 100, 100, { clubBash, punch }, "Ogre", 0.0f };
+Entity goblin{ 100, 100, { quickStab, rockThrow }, "Goblin", 0.0f };
+Entity slime{ 25, 50, { slimeHug }, "Pet Slime", 1.0f };
+Entity troll{ 125, 125, { quickClubBash, splash }, "troll", 0.0f };
+Entity mutant{ 200, 200, { punch, heavyPunch }, "mutant", 0.0f };
+Entity rat{ 100, 200, { bite, scratch }, "Rat", 0.25f };
+Entity babyRat{ 25, 50, { bite, scratch, splash }, "Baby Rat", 0.5f };
+Entity guard{ 200, 200, { heavyBlow, quickAttack }, "Unloyal Guard", 0.0f };
 
-Weapon bow{ { arrowShoot, chokeHold }, "Bow", 0.0 };
-Weapon axe{ { deepCut, finisher }, "Axe", 0.0 };
-Weapon sword{ { heavyBlow, quickAttack }, "Sword", 0.0 };
-Weapon ogreInABottle{ { clubBash, punch }, "Ogre in a Bottle", 0.5 };
-Weapon python{ { heaviestBlow, quickAttack }, "Python", 0.5 };
+// Players:
+// Player varName{ health, max health, { attack1, attack2, ... }, "str name", leech amount(0 to 1 work best).
+Player wanderer{ 50, 100, { rockThrow, heavyKick }, "Wanderer", 0.0f };
+
+// Our input object:
+Input input;
 #pragma endregion
 
 #pragma endregion
@@ -466,15 +470,44 @@ void FightSequence(vector<Entity> enemyTypes, bool spareable, vector<vector<stri
 
 
 
-int playerX = 0, playerY = 0;
-void Run() // Runs the game, this function is called once per playthrough.
+void Start()
 {
+    terminal = Term::Terminal(true, true, true, true);
+    Term::terminal_title("M");
+    std::tuple<size_t, size_t> size = Term::get_size();
+    screenWidth = static_cast<int>(std::get<1>(size));
+    screenHeight = static_cast<int>(std::get<0>(size));
+    window = Term::Window(screenWidth, screenHeight);
+
+    entities = vector<Entity*>();
+    player = new Player(wanderer);
+
+    /*manager.SetDisplaySize(screenWidth, screenHeight);
+    const gainput::DeviceId keyboardId = manager.CreateDevice<gainput::InputDeviceKeyboard>();
+    const gainput::DeviceId mouseId = manager.CreateDevice<gainput::InputDeviceMouse>();
+
+    gainput::InputMap map(manager);
+    map.MapBool(ButtonConfirm, keyboardId, gainput::KeyReturn);
+    map.MapBool(ButtonConfirm, mouseId, gainput::MouseButtonLeft);*/
+}
+
+
+
+
+int playerX = 0, playerY = 0;
+void Update() // Runs the game, this function is called once per playthrough.
+{
+    input.Update();
+
+    playerX += int(input.d.held) - int(input.a.held);
+    playerY += int(input.w.held) - int(input.s.held);
+
     window.clear();
     for (int x = 1; x < screenWidth; x++)
         for (int y = 1; y < screenHeight; y++)
         {
-            int x2 = (x - 1 + playerX) % (screenWidth - 1) + 1;
-            int y2 = (y - 1 + playerY) % (screenHeight - 1) + 1;
+            int x2 = JMod(x - 1 + playerX, screenWidth - 1) + 1;
+            int y2 = JMod(y - 1 - playerY, screenHeight - 1) + 1;
             window.set_char(x2, y2, '#');
             window.set_fg(x2, y2, { static_cast<byte>(x * 255 / screenWidth), static_cast<byte>(y * 255 / screenHeight), 0 });
             window.set_bg(x2, y2, { 0, 0, static_cast<byte>(x + y) * 5u % 255u });
@@ -485,16 +518,24 @@ void Run() // Runs the game, this function is called once per playthrough.
 
 
 
+void End()
+{
+
+}
+
+
+
+
 
 int main()
 {
-    terminal = Term::Terminal(true, true, true, true);
-    Term::terminal_title("M");
-    std::tuple<size_t, size_t> size = Term::get_size();
-    screenWidth = std::get<1>(size);
-    screenHeight = std::get<0>(size);
-    window = Term::Window(screenWidth, screenHeight);
-
     while (restart)
-        Run();
+    {
+        Start();
+
+        while (shouldRun)
+            Update();
+
+        End();
+    }
 }
