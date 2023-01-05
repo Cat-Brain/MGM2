@@ -43,7 +43,7 @@ public:
     int selfDamage;
     int selfDamageRand;
     int length;
-    int timeSinceStart;
+    float startTime;
     string name;
     vector<Entity*> summons;
 
@@ -52,7 +52,7 @@ public:
         vector<Entity*> summons, int length, string name) :
         procs(procs), procChances(procChances), damage(damage), damageRand(damageRand), selfProcs(selfProcs),
         selfProcChances(selfProcChances), selfDamage(selfDamage), selfDamageRand(selfDamageRand), summons(summons),
-        length(length), name(name), timeSinceStart(0)
+        length(length), name(name), startTime(tTime)
     { }
 
     Attack() = default;

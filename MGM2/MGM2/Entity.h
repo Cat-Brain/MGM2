@@ -29,19 +29,24 @@ public:
         return &attacks[activeAttack];
     }
 
-    void FindNewAttack()
-    {
-        CurrentAttack()->timeSinceStart = 0;
-        activeAttack = RandRange(0, static_cast<int>(attacks.size()) - 1);
-        CurrentAttack()->timeSinceStart = 1;
-    }
-
     int FindDamageReduction()
     {
         int damageReduction = 0;
         for (int i = 0; i < inflictions.size(); i++)
             damageReduction += inflictions[i].Reduction();
         return damageReduction;
+    }
+
+    virtual bool TryMove(Game* game, Vec2 dir)
+    {
+        Vec2 newPos = pos + dir;
+        if (dir == Vec2(0, 0))
+            return false;
+        for (int i = 0; i < game->entities.size(); i++)
+            if (game->entities[i]->pos == newPos)
+                return false;
+        pos = newPos;
+        return true;
     }
 
     virtual void Update(Game* game, float deltaTime)
@@ -54,26 +59,9 @@ public:
         game->Draw(game->ToScreenSpace(pos), '+', color);
     }
 
-    TurnReturn TakeTurn(int currentIndex)
+    virtual void UIUpdate(Game* game, float deltaTime)
     {
-        vector<Entity*> newSummons = vector<Entity*>();
 
-        Attack* currentAttack = CurrentAttack();
-
-        if (currentAttack->length <= currentAttack->timeSinceStart)
-        {
-            AttackHit attackHit = currentAttack->RollDamage(currentIndex, FindDamageReduction());
-            newSummons = currentAttack->summons;
-
-            ApplyHit(attackHit.selfHit);
-
-            FindNewAttack();
-
-            return TurnReturn(attackHit.hit, newSummons);
-        }
-        else
-            currentAttack->timeSinceStart++;
-        return TurnReturn(Hit(0, {}, 0), {});
     }
 
     void ApplyHit(Hit hit)

@@ -25,6 +25,8 @@ void Game::Update()
 
 	for (Entity* entity : entities)
 		entity->DUpdate(this, deltaTime);
+	for (Entity* entity : entities)
+		entity->UIUpdate(this, deltaTime);
 	std::cout << window.render(1, 1, true);
 
 	shouldRun ^= Input::FindKey(VK_ESCAPE);

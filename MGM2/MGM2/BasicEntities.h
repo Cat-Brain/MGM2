@@ -27,7 +27,7 @@ public:
 	{
 		if (pos.Squistance(game->playerPos) > 1)
 		{
-			pos += pos.DirTo(game->playerPos);
+			TryMove(game, pos.DirTo(game->playerPos));
 			return true;
 		}
 		return false;
