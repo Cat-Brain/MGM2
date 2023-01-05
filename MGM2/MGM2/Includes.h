@@ -112,8 +112,6 @@ public:
 
 #pragma region Early Variables
 
-class Player;
-Player* player;
-Vec2 playerPos;
+bool shouldRun = true;
 
 #pragma endregion

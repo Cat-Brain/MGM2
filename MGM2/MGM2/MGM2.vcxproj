@@ -28,6 +28,7 @@
     <ClInclude Include="cpp-terminal\prompt.hpp" />
     <ClInclude Include="cpp-terminal\version.hpp" />
     <ClInclude Include="cpp-terminal\window.hpp" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Includes.h" />
     <ClInclude Include="Infliction.h" />
   </ItemGroup>
@@ -37,6 +38,7 @@
     <ClCompile Include="cpp-terminal\private\platform.cpp" />
     <ClCompile Include="cpp-terminal\prompt.cpp" />
     <ClCompile Include="cpp-terminal\window.cpp" />
+    <ClInclude Include="Game2.h" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>

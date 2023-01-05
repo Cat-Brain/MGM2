@@ -1,12 +1,10 @@
-﻿// Go to https ://github.com/Matthew-12525/Create-Your-Own-Adventure for the unmodded experience. =]
-/*
-Hiya, this 'mod' was written by Jordan Baumann(me),
-however this all wouldn't of existed without Matthew's original version of the game(link above^^^).
-I hope that you enjoy this experience, and if you want, maybe you'll even mod this mod! =]
-*/
+﻿// This is a game, known as MGM2, or Matthew's Game Modded 2, MGM2 is the sequel to the RPG Matthew's Game Modded, or MGM1.
+// MGM1 (Which can be found here: https://github.com/Cat-Brain/MGM1-CPP) is a mod of Matthew's game which attempts to update the combat.
+// Matthew's Game (Which can be found here: https://github.com/matthew-12525/create-your-own-adventure) is an RPG.
+// The name Matthew's Game is used largely by myself(Jordan Baumann) to refer to the choose-your-adventure game made by Matthew.
 
 
-#include "Combat.h"
+#include "Game2.h"
 
 
 #pragma region Variables
@@ -17,8 +15,9 @@ Term::Terminal terminal = Term::Terminal(true, true, true, true);
 Term::Window window = Term::Window(1, 1);
 int screenWidth, screenHeight;
 
-bool shouldRun = true, restart = true;
+bool restart = false;
 Settings currentSettings;
+Game game;
 
 #pragma region Constants
 //Attacks
@@ -472,15 +471,10 @@ void FightSequence(vector<Entity> enemyTypes, bool spareable, vector<vector<stri
 
 void Start()
 {
-    terminal = Term::Terminal(true, true, true, true);
-    Term::terminal_title("M");
-    std::tuple<size_t, size_t> size = Term::get_size();
-    screenWidth = static_cast<int>(std::get<1>(size));
-    screenHeight = static_cast<int>(std::get<0>(size));
-    window = Term::Window(screenWidth, screenHeight);
-
-    entities = vector<Entity*>();
-    player = new Player(wanderer);
+    game = Game();
+    Player* player = new Player(wanderer);
+    game.player = player;
+    game.entities.push_back(player);
 
     /*manager.SetDisplaySize(screenWidth, screenHeight);
     const gainput::DeviceId keyboardId = manager.CreateDevice<gainput::InputDeviceKeyboard>();
@@ -494,25 +488,9 @@ void Start()
 
 
 
-int playerX = 0, playerY = 0;
 void Update() // Runs the game, this function is called once per playthrough.
 {
-    input.Update();
-
-    playerX += int(input.d.held) - int(input.a.held);
-    playerY += int(input.w.held) - int(input.s.held);
-
-    window.clear();
-    for (int x = 1; x < screenWidth; x++)
-        for (int y = 1; y < screenHeight; y++)
-        {
-            int x2 = JMod(x - 1 + playerX, screenWidth - 1) + 1;
-            int y2 = JMod(y - 1 - playerY, screenHeight - 1) + 1;
-            window.set_char(x2, y2, '#');
-            window.set_fg(x2, y2, { static_cast<byte>(x * 255 / screenWidth), static_cast<byte>(y * 255 / screenHeight), 0 });
-            window.set_bg(x2, y2, { 0, 0, static_cast<byte>(x + y) * 5u % 255u });
-        }
-    std::cout << window.render(1, 1, true);
+    game.Update();
 }
 
 
@@ -529,7 +507,7 @@ void End()
 
 int main()
 {
-    while (restart)
+    do
     {
         Start();
 
@@ -537,5 +515,5 @@ int main()
             Update();
 
         End();
-    }
+    } while (restart);
 }

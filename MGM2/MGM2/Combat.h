@@ -123,6 +123,7 @@ public:
 class Entity
 {
 public:
+    Vec2 pos;
     vector<StatusEffect> inflictions;
     vector<int> inflictionAttackers;
     int health;
@@ -162,7 +163,7 @@ public:
         return damageReduction;
     }
 
-    void Update()
+    virtual void Update(Game* game)
     {
 
     }
@@ -239,4 +240,12 @@ class Player : public Entity
 {
 public:
     using Entity::Entity;
+
+    void Update(Game* game) override
+    {
+        pos.x += int(game->input.d.held) - int(game->input.a.held);
+        pos.y += int(game->input.w.held) - int(game->input.s.held);
+
+        game->playerPos = pos;
+    }
 };
