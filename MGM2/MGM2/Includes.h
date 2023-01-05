@@ -108,10 +108,94 @@ public:
     int x, y;
 
     Vec2(int x = 0, int y = 0) : x(x), y(y) { }
+
+#pragma region operators
+
+    Vec2 operator + (const Vec2& other)
+    {
+        return { x + other.x, y + other.y };
+    }
+
+    Vec2 operator - (const Vec2& other)
+    {
+        return { x - other.x, y - other.y };
+    }
+
+    Vec2 operator * (const Vec2& other)
+    {
+        return { x * other.x, y * other.y };
+    }
+
+    Vec2 operator / (const Vec2& other)
+    {
+        return { x / other.x, y / other.y };
+    }
+
+    Vec2 operator / (const int& scaler)
+    {
+        return { x / scaler, y / scaler };
+    }
+
+    bool operator == (const Vec2& other)
+    {
+        return x == other.x && y == other.y;
+    }
+
+    bool operator != (const Vec2& other)
+    {
+        return x != other.x || y != other.y;
+    }
+
+    void operator += (const Vec2& other)
+    {
+        *this = *this + other;
+    }
+
+    void operator -= (const Vec2& other)
+    {
+        *this = *this - other;
+    }
+
+    void operator *= (const Vec2& other)
+    {
+        *this = *this * other;
+    }
+
+    void operator /= (const Vec2& other)
+    {
+        *this = *this / other;
+    }
+
+#pragma endregion
+
+#pragma region Math
+
+    int Squagnitude()
+    {
+        return std::max(labs(x), labs(y));
+    }
+
+    Vec2 Squarmalized()
+    {
+        return *this / Squagnitude();
+    }
+
+    Vec2 DirTo(Vec2 endPoint)
+    {
+        return (endPoint - *this).Squarmalized();
+    }
+
+    int Squistance(Vec2 other)
+    {
+        return (*this - other).Squagnitude();
+    }
+
+#pragma endregion
 };
 
 #pragma region Early Variables
 
 bool shouldRun = true;
+float tTime;
 
 #pragma endregion

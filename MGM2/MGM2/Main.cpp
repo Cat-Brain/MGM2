@@ -29,7 +29,7 @@ Game game;
 Attack fireBreath{ { {BURNING, 2} }, { 100 }, 0, 0, {}, {}, 0, 0, {}, 3, "fire breath" };
 Attack heavyBite{ {}, {}, 50, 0, {}, {}, 0, 0, {}, 4, "heavy bite" };
 //Enemies that must be declared early.
-Entity joshroHead{ 25, 50, {fireBreath, heavyBite}, "Joshro Head", 0.5f };
+Entity joshroHead{ { 0, 0, 0 }, 25, 50, {fireBreath, heavyBite}, "Joshro Head", 0.5f };
 //Normal attacks.
 Attack clubBash{ { {STUN, 2} }, { 100 }, 25, 10, {}, {}, 0, 0, {}, 3, "club bash" };
 Attack punch{ {}, {}, 15, 15, {}, {}, 0, 0, {}, 1, "punch" };
@@ -58,19 +58,19 @@ Attack heavyKick{ {}, {}, 60, 60, {}, {}, 0, 0, {}, 3, "heavy kick" };
 
 //The syntax for enemies is :
 //Enemy varName(start health, max health, { attack1, attack2, ... }, "str name", leech amount(0 to 1 work best).
-Entity joshrosBody{ 300, 300, { growHead }, "Joshro's Body", 0.0f };
-Entity ogre{ 100, 100, { clubBash, punch }, "Ogre", 0.0f };
-Entity goblin{ 100, 100, { quickStab, rockThrow }, "Goblin", 0.0f };
-Entity slime{ 25, 50, { slimeHug }, "Pet Slime", 1.0f };
-Entity troll{ 125, 125, { quickClubBash, splash }, "troll", 0.0f };
-Entity mutant{ 200, 200, { punch, heavyPunch }, "mutant", 0.0f };
-Entity rat{ 100, 200, { bite, scratch }, "Rat", 0.25f };
-Entity babyRat{ 25, 50, { bite, scratch, splash }, "Baby Rat", 0.5f };
-Entity guard{ 200, 200, { heavyBlow, quickAttack }, "Unloyal Guard", 0.0f };
+Entity joshrosBody{ { 0, 0, 0 }, 300, 300, { growHead }, "Joshro's Body", 0.0f };
+Entity ogre{ { 0, 0, 0 }, 100, 100, { clubBash, punch }, "Ogre", 0.0f };
+Entity goblin{ { 0, 0, 0 }, 100, 100, { quickStab, rockThrow }, "Goblin", 0.0f };
+Entity slime{ { 0, 0, 0 }, 25, 50, { slimeHug }, "Pet Slime", 1.0f };
+Entity troll{ { 0, 0, 0 }, 125, 125, { quickClubBash, splash }, "troll", 0.0f };
+Entity mutant{ { 0, 0, 0 }, 200, 200, { punch, heavyPunch }, "mutant", 0.0f };
+Entity rat{ { 0, 0, 0 }, 100, 200, { bite, scratch }, "Rat", 0.25f };
+Entity babyRat{ { 0, 0, 0 }, 25, 50, { bite, scratch, splash }, "Baby Rat", 0.5f };
+Entity guard{ { 0, 0, 0 }, 200, 200, { heavyBlow, quickAttack }, "Unloyal Guard", 0.0f };
 
 // Players:
 // Player varName{ health, max health, { attack1, attack2, ... }, "str name", leech amount(0 to 1 work best).
-Player wanderer{ 50, 100, { rockThrow, heavyKick }, "Wanderer", 0.0f };
+Player wanderer{ 0.25f, { 0, 0, 255 }, 50, 100, { rockThrow, heavyKick }, "Wanderer", 0.0f };
 
 // Our input object:
 Input input;
@@ -475,6 +475,8 @@ void Start()
     Player* player = new Player(wanderer);
     game.player = player;
     game.entities.push_back(player);
+    game.entities.push_back(new EnemyBase(0.5f, { 255, 0, 0 }, 1, 1, { arrowShoot }, "TEST", 0.0f));
+
 
     /*manager.SetDisplaySize(screenWidth, screenHeight);
     const gainput::DeviceId keyboardId = manager.CreateDevice<gainput::InputDeviceKeyboard>();

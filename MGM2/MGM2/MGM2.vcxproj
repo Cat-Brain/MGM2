@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BasicEntities.h" />
     <ClInclude Include="Combat.h" />
     <ClInclude Include="cpp-terminal\base.hpp" />
     <ClInclude Include="cpp-terminal\input.hpp" />
@@ -28,9 +29,11 @@
     <ClInclude Include="cpp-terminal\prompt.hpp" />
     <ClInclude Include="cpp-terminal\version.hpp" />
     <ClInclude Include="cpp-terminal\window.hpp" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Includes.h" />
     <ClInclude Include="Infliction.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp-terminal\base.cpp" />
