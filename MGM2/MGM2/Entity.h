@@ -20,7 +20,9 @@ public:
         inflictions(vector<StatusEffect>()), inflictionAttackers(vector<int>()),
         color(color), health(health), maxHealth(maxHealth), activeAttack(0),
         attacks(attacks), name(name), leech(leech), summoned(false), ally(false)
-    { }
+    {
+        Start();
+    }
 
     Entity() : Entity({ 255, 255, 255 }, 0, 0, {}, "", 0.0f) { }
 
@@ -47,6 +49,11 @@ public:
                 return false;
         pos = newPos;
         return true;
+    }
+
+    virtual void Start()
+    {
+
     }
 
     virtual void Update(Game* game, float deltaTime)

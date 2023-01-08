@@ -42,14 +42,14 @@ public:
     vector<int> selfProcChances; // Percent
     int selfDamage;
     int selfDamageRand;
-    int length;
+    float length;
     float startTime;
     string name;
     vector<Entity*> summons;
 
     Attack(vector<StatusEffect> procs, vector<int> procChances, int damage, int damageRand,
         vector<StatusEffect> selfProcs, vector<int> selfProcChances, int selfDamage, int selfDamageRand,
-        vector<Entity*> summons, int length, string name) :
+        vector<Entity*> summons, float length, string name) :
         procs(procs), procChances(procChances), damage(damage), damageRand(damageRand), selfProcs(selfProcs),
         selfProcChances(selfProcChances), selfDamage(selfDamage), selfDamageRand(selfDamageRand), summons(summons),
         length(length), name(name), startTime(tTime)

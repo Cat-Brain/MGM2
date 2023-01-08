@@ -12,15 +12,38 @@ public:
 	Input input;
 	Player* player;
 	Vec2 playerPos;
-	steady_clock::time_point lastUpdate;
+	steady_clock::duration lastUpdate;
+	steady_clock::time_point startTime;
 
-	Game() : terminal(true, true, true, true), window(0, 0)
+	Game() : terminal(false, true, true, true), window(0, 0) { }
+
+	void Start()
 	{
+		STARTUPINFO info;
+		PROCESS_INFORMATION processInfo;
+		ZeroMemory(&info, sizeof(STARTUPINFO));
+		ZeroMemory(&processInfo, sizeof(PROCESS_INFORMATION));
+		CreateProcess(TEXT("LOL C:/Users/0501j/Programming/C++/MGM2/MGM2/x64/Debug/MGM2.exe"),
+			(TCHAR*)TEXT("MGM2"), NULL, NULL,
+			TRUE, CREATE_NEW_CONSOLE,
+			NULL, NULL,
+			&info,
+			&processInfo);
+		std::cout << GetLastErrorAsString();
+		HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+		DWORD prev_mode;
+		if (!GetConsoleMode(hOut, &prev_mode))
+			std::cout << GetLastErrorAsString();
+		if (!SetConsoleMode(hOut, ENABLE_EXTENDED_FLAGS |
+			(prev_mode & ~ENABLE_QUICK_EDIT_MODE)))
+			std::cout << GetLastErrorAsString();
+
 		std::tuple<size_t, size_t> unrefinedScreenDim = Term::get_size();
 		screenDim.x = static_cast<int>(std::get<1>(unrefinedScreenDim));
 		screenDim.y = static_cast<int>(std::get<0>(unrefinedScreenDim));
 		window = Term::Window(screenDim.x, screenDim.y);
-		tTime = 0;
+		startTime = steady_clock::now();
+		lastUpdate = startTime - startTime;
 	}
 
 	Vec2 ToScreenSpace(Vec2 pos)

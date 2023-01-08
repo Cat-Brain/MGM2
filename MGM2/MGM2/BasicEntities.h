@@ -6,7 +6,10 @@ public:
 	float lastTime, timePer;
 
 	FunctionalEntity(float timePer, Term::RGB color, int health, int maxHealth, vector<Attack> attacks, string name, float leech) :
-		Entity(color, health, maxHealth, attacks, name, leech), lastTime(tTime), timePer(timePer) { }
+		Entity(color, health, maxHealth, attacks, name, leech), lastTime(tTime), timePer(timePer)
+	{
+		Start();
+	}
 
 	virtual bool TUpdate(Game* game, float deltaTime, float bigDeltaTime) { return true; }
 
@@ -21,7 +24,10 @@ class EnemyBase : public FunctionalEntity
 {
 public:
 	EnemyBase(float timePer, Term::RGB color, int health, int maxHealth, vector<Attack> attacks, string name, float leech) :
-		FunctionalEntity(timePer, color, health, maxHealth, attacks, name, leech) { }
+		FunctionalEntity(timePer, color, health, maxHealth, attacks, name, leech)
+	{
+		Start();
+	}
 
 	bool TUpdate(Game* game, float deltaTime, float bigDeltaTime) override
 	{

@@ -34,7 +34,7 @@ Entity joshroHead{ { 0, 0, 0 }, 25, 50, {fireBreath, heavyBite}, "Joshro Head", 
 Attack clubBash{ { {STUN, 2} }, { 100 }, 25, 10, {}, {}, 0, 0, {}, 3, "club bash" };
 Attack punch{ {}, {}, 15, 15, {}, {}, 0, 0, {}, 1, "punch" };
 Attack heavyPunch{ { {STUN, 2} }, { 75 }, 25, 25, {}, {}, 0, 0, {}, 2, "heavy punch" };
-Attack quickStab{ { {POISON, 3} }, { 50 }, 5, 5, {}, {}, 0, 0, {}, 1, "quick stab" };
+Attack quickStab{ { {POISON, 3} }, { 50  }, 5, 5, {}, {}, 0, 0, {}, 1, "quick stab" };
 Attack rockThrow{ { {STUN, 1} }, { 25 }, 5, 5, {}, {}, 0, 0, {}, 1, "rock throw" };
 Attack slimeHug{ { {DEADLY_HUG, 3} }, { 100 }, 0, 0, {}, {}, 0, 0, {}, 1, "slime hug" };
 Attack slimeSpike{ { {BLEED, 3} }, { 100 }, 5, 0, {}, {}, 0, 0, {}, 1, "slime spike" };
@@ -70,7 +70,7 @@ Entity guard{ { 0, 0, 0 }, 200, 200, { heavyBlow, quickAttack }, "Unloyal Guard"
 
 // Players:
 // Player varName{ health, max health, { attack1, attack2, ... }, "str name", leech amount(0 to 1 work best).
-Player wanderer{ 0.25f, { 0, 0, 255 }, 50, 100, { rockThrow, heavyKick }, "Wanderer", 0.0f };
+Player wanderer{ 0.25f, { 0, 0, 255 }, 50, 100, { rockThrow, heavyKick, healify, spare }, "Wanderer", 0.0f };
 
 // Our input object:
 Input input;
@@ -471,7 +471,7 @@ void FightSequence(vector<Entity> enemyTypes, bool spareable, vector<vector<stri
 
 void Start()
 {
-    game = Game();
+    game.Start();
     Player* player = new Player(wanderer);
     game.player = player;
     game.entities.push_back(player);
@@ -492,7 +492,7 @@ void Start()
 
 void Update() // Runs the game, this function is called once per playthrough.
 {
-    game.Update();
+    //game.Update();
 }
 
 
